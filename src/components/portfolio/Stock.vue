@@ -7,7 +7,7 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <input type="number" placeholder="quantity" class="form-control" v-model="quantity">
+          <input type="number" placeholder="quantity" class="form-control" v-model="quantity" :max="stock.quantity" min="0">
         </div>
         <div class="pull-right">
           <button class="btn btn-success" @click="sellStock" :disabled="quantity <= 0">Sell</button>
