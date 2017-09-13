@@ -17,16 +17,21 @@
           </ul>
         </li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a style="color: #FFF">Funds: {{ funds }}</a></li>
+      </ul>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  
+  computed: {
+    ...mapGetters(['funds'])
+  }
 }
 </script>
 
 <style lang="scss">
-
 </style>
