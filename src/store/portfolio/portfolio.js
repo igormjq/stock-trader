@@ -48,12 +48,15 @@ const getters = {
             }
         });
     },
-    funds(state) {
+    fundsDisplay(state) {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
             minimumFractionDigits: 0
         }).format(state.funds)
+    },
+    funds(state) {
+        return state.funds;
     }
 };
 

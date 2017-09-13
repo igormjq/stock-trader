@@ -7,7 +7,8 @@ const state = {
 const getters = {
     stocks: state => {
         return state.stocks;
-    }
+    },
+    orderValidator: (state, getters) => order => getters.funds < (order.quantity * order.stockPrice)
 };
 
 const mutations = {

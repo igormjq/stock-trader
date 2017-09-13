@@ -7,7 +7,7 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <input type="number" placeholder="quantity" class="form-control" v-model.number="quantity">
+          <input type="number" placeholder="quantity" class="form-control" v-model.number="quantity" min="0">
         </div>
         <div class="pull-right">
           <button class="btn btn-success" @click="buyStock" :disabled="quantity <= 0">Buy</button>
@@ -27,13 +27,19 @@ export default {
   },
   methods: {
     buyStock() {
+      
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: this.quantity
       };
+
+      if(this.$store.getters.orderValidator(order))
+        return alert('Insufficent funds');
+      
       this.$store.dispatch('buyStock', order);
       this.quantity = 0;
+            
     }
   }
 }
