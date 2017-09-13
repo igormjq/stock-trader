@@ -39,7 +39,6 @@ const getters = {
     stockPortfolio(state, getters) {
         return state.stocks.map(stock => {
             const record = getters.stocks.find(element => element.id === stock.id);
-            console.log('stock portfolio', record);
             
             return {
                 id: stock.id,
@@ -50,7 +49,11 @@ const getters = {
         });
     },
     funds(state) {
-        return state.funds;
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0
+        }).format(state.funds)
     }
 };
 
