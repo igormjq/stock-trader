@@ -7,10 +7,10 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <input type="number" placeholder="quantity" class="form-control" v-model.number="quantity" min="0">
+          <input type="number" placeholder="quantity" class="form-control" :class="{ 'invalid': insufficientFunds }" v-model.number="quantity" min="0">
         </div>
         <div class="pull-right">
-          <button class="btn btn-success" @click="buyStock" :disabled="quantity <= 0">Buy</button>
+          <button class="btn btn-success" @click="buyStock" :disabled="insufficientFunds || quantity <= 0">Buy</button>
         </div>
       </div>
     </div>
@@ -25,17 +25,21 @@ export default {
       quantity: 0
     }
   },
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
+    insufficientFunds() {
+      return this.quantity * this.stock.price > this.funds;
+    }
+  },
   methods: {
     buyStock() {
-      
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: this.quantity
       };
-
-      if(this.$store.getters.orderValidator(order))
-        return alert('Insufficent funds');
       
       this.$store.dispatch('buyStock', order);
       this.quantity = 0;
@@ -45,6 +49,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  .form-control:focus {
+    border: 1px solid green;
 
+    &.invalid {
+      border: 1px solid #F00;
+    }
+  }
+  
 </style>

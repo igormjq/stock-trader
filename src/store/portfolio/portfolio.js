@@ -1,5 +1,5 @@
 const state = {
-    funds: 10000,
+    funds: 1000,
     stocks: []
 };
 
@@ -56,7 +56,7 @@ const getters = {
         }).format(state.funds)
     },
     funds(state) {
-        return state.funds;
+        return state.funds
     }
 };
 

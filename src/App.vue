@@ -19,5 +19,10 @@ export default {
 </script>
 
 <style lang="scss">
-
+  .form-control {
+    border-radius: 30px;
+    &:focus {
+      box-shadow: none;
+    }
+  }
 </style>
