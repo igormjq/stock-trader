@@ -3,7 +3,7 @@
     <h1>Trade or view your portfolio</h1>
     <h6>Click on 'End day' to end the day</h6>
     <hr>
-    <p>Your funds: {{ fundsDisplay }}</p>
+    <p>Your funds: {{ funds }}</p>
   </div>
 </template>
 

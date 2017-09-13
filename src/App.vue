@@ -14,6 +14,12 @@ export default {
   },
   created() {
     this.$store.dispatch('initStocks');
+  },
+  mounted() {
+    document.querySelector('.stocks-wrapper').addEventListener('wheel', e => {
+      if(e.target.tagName === 'INPUT' && document.activeElement === e.target)
+        return true;
+    });
   }
 }
 </script>
