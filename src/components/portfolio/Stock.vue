@@ -7,10 +7,10 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <input type="number" placeholder="quantity" class="form-control" v-model="quantity" :max="stock.quantity" min="0">
+          <input type="number" placeholder="quantity" class="form-control" :class="{ invalid: insufficientQuantity }" v-model="quantity" min="0">
         </div>
         <div class="pull-right">
-          <button class="btn btn-success" @click="sellStock" :disabled="quantity <= 0">Sell</button>
+          <button class="btn btn-success" @click="sellStock" :disabled=" insufficientQuantity || quantity <= 0">Sell</button>
         </div>
       </div>
     </div>
@@ -26,6 +26,11 @@ export default {
       quantity: 0
     }
   },
+  computed: {
+    insufficientQuantity() {
+      return this.quantity > this.stock.quantity;
+    }
+  },
   methods: {
     ...mapActions({
       sendSellOrder: 'sellStock'
@@ -36,6 +41,7 @@ export default {
         stockPrice: this.stock.price,
         quantity: this.quantity
       };
+  
       this.sendSellOrder(order);
       this.quantity = 0;
     }
@@ -44,5 +50,11 @@ export default {
 </script>
 
 <style lang="scss">
+  .form-control:focus {
+    border: 1px solid green;
 
+    &.invalid {
+      border: 1px solid #F00;
+    }
+  }
 </style>
