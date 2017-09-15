@@ -3,7 +3,7 @@
     <h1>Trade or view your portfolio</h1>
     <h6>Click on 'End day' to end the day</h6>
     <hr>
-    <p>Your funds: {{ funds }}</p>
+    <p>Your funds: {{ funds | toCurrency }}</p>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 export default {
   computed: {
     funds() {
-      return this.$store.getters.fundsDisplay;
+      return this.$store.getters.funds;
     }
   }
 }

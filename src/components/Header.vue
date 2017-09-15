@@ -18,7 +18,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a style="color: #FFF">Funds: {{ fundsDisplay }}</a></li>
+        <li><a style="color: #FFF">Funds: {{ funds | toCurrency }}</a></li>
       </ul>
     </div>
   </nav>
@@ -28,7 +28,7 @@
 import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(['fundsDisplay'])
+    ...mapGetters(['funds'])
   }
 }
 </script>

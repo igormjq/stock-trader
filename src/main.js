@@ -3,6 +3,9 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 
+// Filters
+import * as filters from './filters';
+
 // Routes
 import { routes } from './routes'
 
@@ -21,6 +24,7 @@ const router = new VueRouter({
 
 new Vue({
   el: '#app',
+  filters,
   router,
   store,
   render: h => h(App)
