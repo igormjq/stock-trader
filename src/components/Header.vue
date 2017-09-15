@@ -7,17 +7,17 @@
       <ul class="nav navbar-nav">
         <router-link to="/portfolio" activeClass="active" tag="li"><a>Portfolio</a></router-link>
         <router-link to="/stocks" activeClass="active" tag="li"><a>Stocks</a></router-link>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">Page 1
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a @click="randomizeStocks">End day</a></li>
+         <li class="dropdown" :class="{ open: isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button">Save & Load
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a>Save</a></li>
+            <li><a>Load</a></li>
+          </ul>
+        </li>
         <li><a style="color: #FFF">Funds: {{ funds | toCurrency }}</a></li>
       </ul>
     </div>
@@ -25,13 +25,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
+  data() {
+    return {
+      isDropdownOpen: false
+    }
+  },
   computed: {
     ...mapGetters(['funds'])
+  },
+  methods: {
+    ...mapActions(['randomizeStocks'])
   }
+
 }
 </script>
 
 <style lang="scss">
+  .nav {
+    li > a {
+      cursor: pointer;
+    }
+  }
 </style>

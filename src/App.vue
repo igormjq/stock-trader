@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <app-header></app-header>
-    <hr>
-    <router-view></router-view>
+    <transition name="slide" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -14,12 +15,6 @@ export default {
   },
   created() {
     this.$store.dispatch('initStocks');
-  },
-  mounted() {
-    document.querySelector('.stocks-wrapper').addEventListener('wheel', e => {
-      if(e.target.tagName === 'INPUT' && document.activeElement === e.target)
-        return true;
-    });
   }
 }
 </script>
@@ -31,4 +26,34 @@ export default {
       box-shadow: none;
     }
   }
+
+  .slide-enter-active {
+    animation: slide-in .2s ease-out forwards;
+  }
+
+  .slide-leave-active {
+    animation: slide-out .2s ease-out forwards;
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+  }
+
 </style>
