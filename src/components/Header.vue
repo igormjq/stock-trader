@@ -14,8 +14,8 @@
           <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button">Save & Load
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a>Save</a></li>
-            <li><a>Load</a></li>
+            <li><a @click="saveData">Save</a></li>
+            <li><a @click="loadData">Load</a></li>
           </ul>
         </li>
         <li><a style="color: #FFF">Funds: {{ funds | toCurrency }}</a></li>
@@ -33,10 +33,20 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['funds'])
+    ...mapGetters(['funds', 'stocks'])
   },
   methods: {
-    ...mapActions(['randomizeStocks'])
+    ...mapActions(['randomizeStocks', 'loadData']),
+    saveData() {
+      const data = {
+        funds: this.funds,
+        stockPortfolio: this.$store.getters.stockPortfolio,
+        stocks: this.stocks
+      };
+
+      this.$http.put('data.json', data);
+
+    }
   }
 
 }

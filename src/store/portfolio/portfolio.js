@@ -26,6 +26,10 @@ const mutations = {
             state.stocks.splice(state.stocks.indexOf(current), 1);
         }
         state.funds += stockPrice * quantity;
+    },
+    'SET_PORTFOLIO' (state, portfolio) {
+        state.stocks = portfolio.stockPortfolio ? portfolio.stockPortfolio : [];
+        state.funds = portfolio.funds;
     }
 };
 

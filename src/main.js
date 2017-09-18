@@ -19,8 +19,7 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
 
-Vue.http.root = 'https://vuejs-stock-trader-346f5.firebaseio.com/';
-
+Vue.http.options.root = 'https://vuejs-stock-trader-346f5.firebaseio.com/';
 
 const router = new VueRouter({
   mode: 'history',
